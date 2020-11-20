@@ -7,13 +7,16 @@
 int main(int argc, char ** argv){
 	DIR *dir;
 struct dirent *ent;
-if ((dir = opendir (argv[1])) != NULL) {
-  while ((ent = readdir (dir)) != NULL) {
-    printf ("%s\n", ent->d_name);
-  }
-  closedir (dir);
-} else {
-  printf("ERROR\n");
+for(int i = 1; i < argc; i++){
+	if ((dir = opendir (argv[i])) != NULL) {
+		printf ("%s\n", argv[i]);
+	  while ((ent = readdir (dir)) != NULL) {
+		printf ("	%s\n", ent->d_name);
+	  }
+	  closedir (dir);
+	} else {
+	  printf("ERROR\n");
+	}
 }
 	
 	return 0;
