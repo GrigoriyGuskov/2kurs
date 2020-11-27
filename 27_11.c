@@ -52,15 +52,17 @@ int main(int argc, char ** argv){
 	 while ( poll(polls, nfds, -1) != -1) {
 
 		for (int i = 0; i < nfds; i++) {
-			int R = read(files[i], buf, SIZE);
-			if (R == -1) {
-				printf("error reading %s\n", argv[i+1]);
-				R = 0;
-			}
-			else if (R != 0) { 
-				int W = write(STDOUT_FILENO, buf, R);
-				if (W == -1) 
-					printf("error writing\n");
+			if (polls[i].revents & POLLIN){
+				int R = read(files[i], buf, SIZE);
+				if (R == -1) {
+					printf("error reading %s\n", argv[i+1]);
+					R = 0;
+				}
+				else if (R != 0) { 
+					int W = write(STDOUT_FILENO, buf, R);
+					if (W == -1) 
+						printf("error writing\n");
+				}
 			}
 		}
 	}
