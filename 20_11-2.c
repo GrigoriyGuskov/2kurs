@@ -31,9 +31,9 @@ int main(int argc, char ** argv){
 			printf("path: %s	", event->name);
 			if(event->mask & IN_CREATE)
 				printf("event: create\n");
-			else if(event->mask & IN_DELETE)
+			if(event->mask & IN_DELETE)
 				printf("event: delete\n");
-			else if(event->mask & IN_MOVE_SELF)
+			if(event->mask & IN_MOVE_SELF)
 				printf("event: move_self\n");
 			
 		} else {
