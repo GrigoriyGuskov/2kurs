@@ -81,13 +81,16 @@ int main(int argc, char ** argv){
 		sum = 0;
 
 		for(j = 0; !isspace(buf[j]) && buf[j] != '\0'; j++){
-			rflag = 1;
+			if(buf[j] == '-' && rflag == 0)
+				rflag = 1;
+				else {
 			if (isdigit(buf[j]) && !cflag) {
 				last = buf[j] - '0';
 				sum += last;
 			}
 			else 
 				cflag = 1;
+			}
 		}
 		if (!cflag && rflag){
 			if (sum % 3 == 0){
